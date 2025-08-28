@@ -43,7 +43,6 @@ jwt:
 server:
   port: 8080
   servlet:
-    context-path: /api
 
 # 로깅 설정
 logging:
