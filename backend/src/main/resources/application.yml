@@ -1,0 +1,64 @@
+spring:
+  application:
+    name: final-project
+  
+  # PostgreSQL 데이터베이스 설정
+  datasource:
+    url: jdbc:postgresql://localhost:5432/final_project
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:password}
+    driver-class-name: org.postgresql.Driver
+  
+  # Redis 설정 (비활성화)
+  # data:
+  #   redis:
+  #     host: localhost
+  #     port: 6379
+  #     password: ${REDIS_PASSWORD:}
+  #     timeout: 2000ms
+  #     lettuce:
+  #       pool:
+  #         max-active: 8
+  #         max-idle: 8
+  #         min-idle: 0
+  
+  # Spring Session 설정 (Redis 대신 인메모리 사용)
+  session:
+    store-type: none
+
+# MyBatis 설정
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.finalproject.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# JWT 설정
+jwt:
+  secret: ${JWT_SECRET:your-secret-key-here}
+  expiration: 86400000 # 24시간
+
+# 서버 설정
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+# 로깅 설정
+logging:
+  level:
+    com.example.finalproject: DEBUG
+    org.springframework.security: DEBUG
+    org.mybatis: DEBUG
+
+  # Spring Security 설정
+  security:
+    web:
+      firewalls:
+        strict:
+          allow-url-encoded-slash: true
+          allow-back-slash: true
+          allow-url-encoded-double-slash: true
+          allow-semicolon: true
+          allow-url-encoded-percent: true

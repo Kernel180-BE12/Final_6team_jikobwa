@@ -1,0 +1,76 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.4'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '21'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Boot Web Starter - 웹 애플리케이션 개발을 위한 기본 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    
+    // Spring Security - 인증 및 권한 관리
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    
+    // Spring Boot Data Redis - Redis 연결 및 데이터 액세스 (비활성화)
+    // implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    
+    // Spring Session Data Redis - Redis를 이용한 세션 관리 (비활성화)
+    // implementation 'org.springframework.session:spring-session-data-redis'
+    
+    // MyBatis Spring Boot Starter - MyBatis ORM 프레임워크
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
+    
+    // PostgreSQL JDBC Driver - PostgreSQL 데이터베이스 연결
+    implementation 'org.postgresql:postgresql'
+    
+    // JWT API - JWT 토큰 생성 및 검증
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+    
+    // Lombok - 보일러플레이트 코드 자동 생성
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    
+    // Spring Boot DevTools - 개발 편의 도구 (자동 재시작 등)
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    
+    // Spring Boot Configuration Processor - 설정 메타데이터 생성
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    
+    // Spring Boot Test Starter - 테스트 프레임워크
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    
+    // Spring Security Test - 보안 테스트 지원
+    testImplementation 'org.springframework.security:spring-security-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+// UTF-8 인코딩 설정
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+// Java 21 릴리즈 설정
+compileJava {
+    options.release = 21
+}
